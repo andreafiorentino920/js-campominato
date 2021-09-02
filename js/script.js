@@ -4,6 +4,7 @@
 // La partita termina quando il giocatore clicca su un numero “vietato” o clicca su tutte le celle che non sono delle bombe.
 // Al termine della partita il software deve comunicare il punteggio.
 
+// Generare il campo
 for (var i = 1; i <= 100; i++){
     document.getElementById("campo").innerHTML += "<div class=\"quadrato\">"+i+"</div>";
 }
@@ -25,37 +26,27 @@ function getDistinctRandomIntForArray(array, range){
     };
     return array;
  }
- 
  var numeriRandom = generateArrayOfRandomInts(16,100);
  console.log(numeriRandom);
 
+ // In seguito il giocatore clicca sulle celle numerate (non può cliccare più volte sulla stessa cella)
+//  Controllare se il numero cliccato è contenuto nei 16 numeri casuali, se si dire "hai perso".
+
 document.getElementById("campo").addEventListener("click",
 function(event){
-    var numeroCliccato = event.target.innerHTML;
+    event.target.classList.add("red");
+    var numeroCliccato = parseInt(event.target.innerHTML);
     console.log(numeroCliccato);
-    console.log(numeriRandom)
-    if (numeriRandom.includes(numeroCliccato)) {
-        console.log("Si");
-    } else {
-        console.log("no");
+        if (numeriRandom.includes(numeroCliccato)) {
+            alert("BOOM! Hai perso!");        
     }
+    var arrayClick= [];
+    if (arrayClick.includes(numeroCliccato)){
+        alert("Il numero è già stato cliccato");
+ } else if (numeriRandom.includes(numeroCliccato)) {
+        alert("Hai perso! ricarica la pagina!");
+ } else {
+        arrayClick.push(numeroCliccato);
+ }
 }
 )
-
-
-
-// event.target.classList.add("red");
-// console.log(event.target.innerHTML);
-
-// // Dato l'array e l'elemento da cercare, restituisce true se trova l'elemento
-// function inArray(arr,el){
-//     var count=0;
-//     while (count < arr.lenght){
-//         if(arr[count] == el){
-//             return true;
-//         }
-//         count++;
-//     }
-//     return false;
-// }
-// console.log(inArray(,numeriRandom));
