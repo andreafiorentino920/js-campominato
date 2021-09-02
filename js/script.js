@@ -7,25 +7,55 @@
 for (var i = 1; i <= 100; i++){
     document.getElementById("campo").innerHTML += "<div class=\"quadrato\">"+i+"</div>";
 }
-document.getElementById("campo").addEventListener("click",
-function(event){
-    event.target.classList.toggle("red");
-    alert(event.target.innerHTML);
-})
 
+// Generare 16 numeri casuali da 1 a 100
 function getDistinctRandomIntForArray(array, range){
-    var n = Math.floor((Math.random() * range));
+    var n = Math.floor((Math.random() * range)+1);
     if(array.indexOf(n) == -1){        
      return n; 
     } else {
      return getDistinctRandomIntForArray(array, range); 
     }
- }
+}
+
  function generateArrayOfRandomInts(count, range) {
     var array = []; 
-    for ((i=0); i<count; ++i){
+    for (i=0; i<count; ++i){
      array[i] = getDistinctRandomIntForArray(array, range);
     };
-    return array; 
+    return array;
  }
- console.log(generateArrayOfRandomInts(16,100));
+ 
+ var numeriRandom = generateArrayOfRandomInts(16,100);
+ console.log(numeriRandom);
+
+document.getElementById("campo").addEventListener("click",
+function(event){
+    var numeroCliccato = event.target.innerHTML;
+    console.log(numeroCliccato);
+    console.log(numeriRandom)
+    if (numeriRandom.includes(numeroCliccato)) {
+        console.log("Si");
+    } else {
+        console.log("no");
+    }
+}
+)
+
+
+
+// event.target.classList.add("red");
+// console.log(event.target.innerHTML);
+
+// // Dato l'array e l'elemento da cercare, restituisce true se trova l'elemento
+// function inArray(arr,el){
+//     var count=0;
+//     while (count < arr.lenght){
+//         if(arr[count] == el){
+//             return true;
+//         }
+//         count++;
+//     }
+//     return false;
+// }
+// console.log(inArray(,numeriRandom));
