@@ -31,12 +31,12 @@ function getDistinctRandomIntForArray(array, range){
 
  // In seguito il giocatore clicca sulle celle numerate (non può cliccare più volte sulla stessa cella)
 //  Controllare se il numero cliccato è contenuto nei 16 numeri casuali, se si dire "hai perso".
+var arrayClick= [];
 document.getElementById("campo").addEventListener("click",
 	function(event){
 		event.target.classList.add("red");
 		var numeroCliccato = parseInt(event.target.innerHTML);
 		console.log(numeroCliccato);
-		var arrayClick= [];
 		if (arrayClick.includes(numeroCliccato)){
 			alert("Il numero è già stato cliccato");
 		} else if (numeriRandom.includes(numeroCliccato)) {
@@ -52,4 +52,4 @@ document.getElementById("campo").addEventListener("click",
 // creo due array, uno contenente tutti i numeri da 1 a 100 e uno contenente solo i numeri randomici
 // se al primo array ho eliminato tutti i numeri del secondo array allora la partita termina e ho vinto, stampo un messaggio con scritto "hai vinto", e mostro il punteggio
 // se scoppia la bomba e perdo oltre a stampare il messaggio "Ho perso" devo anche comunicare il punteggio
-// il punteggio
+// il punteggio lo posso calcolare creando una variabile punteggio che incrementerò di uno ogni volta che schiaccio su una casella, non scoppia la bomba e non deve essere ripetuta 
