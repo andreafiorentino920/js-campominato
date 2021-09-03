@@ -21,3 +21,8 @@
 .quadrato.red{
     background-color: red;
 }
+
+.bomba_img{
+    background-image: url("../img/bomba_ico.ico");
+    background-size: cover;
+}
