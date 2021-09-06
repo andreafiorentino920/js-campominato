@@ -4,7 +4,10 @@
 // La partita termina quando il giocatore clicca su un numero “vietato” o clicca su tutte le celle che non sono delle bombe.
 // Al termine della partita il software deve comunicare il punteggio.
 
-// FUNZIONI
+/**
+ * FUNZIONI
+ */
+
 // Generare 16 numeri casuali da 1 a 100
 function getDistinctRandomIntForArray(array, range){
     var n = Math.floor((Math.random() * range)+1);
@@ -23,17 +26,20 @@ function getDistinctRandomIntForArray(array, range){
     return array;
  }
  var numeriRandom = generateArrayOfRandomInts(16,100);
- console.log(numeriRandom);
+console.log(numeriRandom);
 
 
-
-
-// PROGRAMMA PRINCIPALE
+/**
+ * PROGRAMMA PRINCIPALE
+ */
+var numeroCelle= 100;
+var numeroBombe = 16;
+var possibilita = numeroCelle - numeroBombe;
 // Generare il campo
-for (var i = 1; i <= 100; i++){
+for (var i = 1; i <= numeroCelle; i++){
     document.getElementById("campo").innerHTML += "<div class=\"quadrato\">"+i+"</div>";
 }
-var arrayClick= [];
+var arrayCliccati= [];
  // In seguito il giocatore clicca sulle celle numerate (non può cliccare più volte sulla stessa cella)
 document.getElementById("campo").addEventListener("click",
 	function(event){
@@ -41,21 +47,20 @@ document.getElementById("campo").addEventListener("click",
 		var numeroCliccato = parseInt(event.target.innerHTML);
 		console.log(numeroCliccato);
         //  Controllare se il numero cliccato è contenuto nei 16 numeri casuali, se si dire "hai perso".
-		if (arrayClick.includes(numeroCliccato)){
+		if (arrayCliccati.includes(numeroCliccato)){
 			alert("Il numero è già stato cliccato");
 		} else if (numeriRandom.includes(numeroCliccato)) {
             event.target.classList.add("bomba_img");
-            console.log("Il tuo punteggio è", arrayClick.length);
-            alert("BOOM! !Hai perso, ricarica la pagina!");
-		} else {
-			arrayClick.push(numeroCliccato);
+            alert("BOOM! !Hai perso, il tuo punteggio è", arrayCliccati.length);
+            location.reload;
 		}
-	}
-)
+        else{
+			arrayCliccati.push(numeroCliccato);
 
-// La partita termina quando il giocatore clicca su un numero “vietato” o clicca su tutte le celle che non sono delle bombe.
-// Al termine della partita il software deve comunicare il punteggio.
-// creo due array, uno contenente tutti i numeri da 1 a 100 e uno contenente solo i numeri randomici
-// se al primo array ho eliminato tutti i numeri del secondo array allora la partita termina e ho vinto, stampo un messaggio con scritto "hai vinto", e mostro il punteggio
-// se scoppia la bomba e perdo oltre a stampare il messaggio "Ho perso" devo anche comunicare il punteggio
-// il punteggio lo posso calcolare creando una variabile punteggio che incrementerò di uno ogni volta che schiaccio su una casella, non scoppia la bomba e non deve essere ripetuta 
+            if(arrayCliccati.length == possibilita){
+                alert("Hai vinto!! Il tuo punteggio è", arrayCliccati.length);
+                location.reload;
+            }
+        }    
+    }
+)
